@@ -1,0 +1,16 @@
+[project]
+name = "rea-toolkit"
+version = "0.1.0"
+description = "Point REA at any URL: fetch safely, route to binary or web analysis, and keep the MCP tool surface small enough for a 32K local model."
+requires-python = ">=3.9"
+dependencies = []
+
+[project.scripts]
+rea-toolkit = "rea_toolkit.cli:main"
+
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["rea_toolkit"]

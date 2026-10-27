@@ -8,6 +8,7 @@ from . import __version__
 from .allowlist import Allowlist
 from .binary import mcp_config, triage
 from .fetch import FetchError, fetch, save
+from .prompts import PROMPTS, render
 from .proxy import run_proxy
 from .web import analyze_web
 
@@ -42,6 +43,19 @@ def cmd_proxy(a):
     return run_proxy(cmd, Allowlist.load(a.allowlist))
 
 
+def cmd_prompts(a):
+    if not a.name:
+        for n, t in PROMPTS.items():
+            print(f"{n:11} {t[:70]}...")
+        return 0
+    if a.name not in PROMPTS:
+        print(f"error: unknown prompt {a.name!r}; run 'rea-toolkit prompts'", file=sys.stderr)
+        return 2
+    vals = dict(kv.split("=", 1) for kv in a.set if "=" in kv)
+    print(render(a.name, vals))
+    return 0
+
+
 def cmd_allowlist(a):
     al = Allowlist.load(a.allowlist)
     print(json.dumps(al.groups, indent=2))
@@ -62,6 +76,11 @@ def main(argv=None):
     pr.add_argument("--allowlist", help="JSON file overriding the default 10-tool allowlist")
     pr.add_argument("upstream", nargs=argparse.REMAINDER)
     pr.set_defaults(fn=cmd_proxy)
+    pm = sub.add_parser("prompts", help="list or print investigation prompts (from REA-Prompts, MIT)")
+    pm.add_argument("name", nargs="?")
+    pm.add_argument("--set", action="append", default=[], metavar="KEY=VALUE",
+                    help="fill <KEY> placeholders, e.g. --set TARGET=./app --set FEATURE=export")
+    pm.set_defaults(fn=cmd_prompts)
     al = sub.add_parser("allowlist", help="print the active allowlist")
     al.add_argument("--allowlist")
     al.set_defaults(fn=cmd_allowlist)

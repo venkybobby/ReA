@@ -66,3 +66,9 @@ def test_proxy_filters_and_blocks(tmp_path):
     assert len(by_id[1]["result"]["tools"]) == 10
     assert "not in the allowlist" in by_id[2]["error"]["message"]
     assert by_id[3]["result"] == {"ok": True}
+
+
+def test_prompt_render():
+    from rea_toolkit.prompts import render
+    out = render("trace", {"TARGET": "./app", "FEATURE": "export"})
+    assert "./app" in out and "export" in out and "<" not in out

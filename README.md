@@ -13,3 +13,10 @@ Point REA at any URL. Stdlib-only Python.
 - **Safety:** http(s) only, private/loopback hosts refused (including after redirects) unless `--allow-private`, 200 MB cap, nothing is executed.
 
 Inspired by a community experiment (32K local model, 3/3 on one small binary); not an official REA project.
+
+## Prompts
+
+`rea-toolkit prompts` lists a few general-purpose investigation prompts adapted from
+[REA-Prompts](https://github.com/JoasASantos/REA-Prompts) (MIT, (c) 2025 Joas Antonio dos Santos),
+for example `rea-toolkit prompts trace --set TARGET=./app --set FEATURE=export`.
+They are short enough for a 32K model. The rest of that pack is not included.

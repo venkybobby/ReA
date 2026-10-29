@@ -69,7 +69,7 @@ def main(argv=None):
     an = sub.add_parser("analyze", help="fetch a URL and route it to binary or web analysis")
     an.add_argument("url")
     an.add_argument("--workdir", default=os.path.join(os.getcwd(), "rea-work"))
-    an.add_argument("--rea-cmd", default="rea-server", help="command that starts the REA MCP server")
+    an.add_argument("--rea-cmd", default="npx -y rea-agents@6.8.0 mcp", help="command that starts the REA MCP server (stdio)")
     an.add_argument("--allow-private", action="store_true", help="allow private/loopback hosts")
     an.set_defaults(fn=cmd_analyze)
     pr = sub.add_parser("proxy", help="stdio MCP proxy exposing only allowlisted tools")

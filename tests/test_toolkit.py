@@ -12,8 +12,8 @@ from rea_toolkit.web import scan_text
 
 TOOLS = [{"name": n, "description": "x" * 100} for n in [
     "open_binary", "close_binary", "binary_session", "list_procedures", "search_procedures",
-    "decompile_procedure", "list_strings", "search_strings", "cross_references",
-    "procedure_references", "patch_bytes", "rename_symbol", "run_script"]]
+    "procedure_pseudo_code", "list_strings", "search_strings", "procedure_callers",
+    "procedure_references", "patch_bytes", "rename_symbol", "run_script", "list_strings_extra"]]
 
 
 def test_allowlist_has_exactly_ten():
